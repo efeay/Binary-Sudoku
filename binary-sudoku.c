@@ -54,7 +54,7 @@ void ikisimgeyatay() {
             continue;
         }
 
-        if (tahta[satir - 1][sutun - 1] != '' || tahta[satir - 1][sutun] != '') {
+        if (tahta[satir - 1][sutun - 1] != '*' || tahta[satir - 1][sutun] != '*') {
             printf("These coordinates are occupied, select another coordinate.\n");
             continue;
         }
@@ -85,7 +85,7 @@ void ikisimgedikey() {
             continue;
         }
 
-        if (tahta[satir - 1][sutun - 1] != '' || tahta[satir][sutun - 1] != '') {
+        if (tahta[satir - 1][sutun - 1] != '*' || tahta[satir][sutun - 1] != '*') {
             printf("These coordinates are occupied, select another coordinate.\n");
             continue;
         }
@@ -116,7 +116,7 @@ void ucsimgedikey() {
             continue;
         }
 
-        if (tahta[satir - 1][sutun - 1] != '' || tahta[satir][sutun - 1] != '' || tahta[satir + 1][sutun - 1] != '*') {
+        if (tahta[satir - 1][sutun - 1] != '*' || tahta[satir][sutun - 1] != '*' || tahta[satir + 1][sutun - 1] != '*') {
             printf("These coordinates are occupied, select another coordinate.\n");
             continue;
         }
@@ -149,7 +149,7 @@ void ucsimgeyatay() {
             continue;
         }
 
-        if (tahta[satir - 1][sutun - 1] != '' || tahta[satir - 1][sutun] != '' || tahta[satir - 1][sutun + 1] != '*') {
+        if (tahta[satir - 1][sutun - 1] != '*' || tahta[satir - 1][sutun] != '*' || tahta[satir - 1][sutun + 1] != '*') {
             printf("These coordinates are occupied, select another coordinate.\n");
             continue;
         }
@@ -177,7 +177,7 @@ void ucsimgeL() {
                 printf("Invalid coordinate.\n");
                 continue;
             }
-            if (tahta[satir - 1][sutun - 1] != '' || tahta[satir - 1][sutun] != '' || tahta[satir][sutun - 1] != '*') {
+            if (tahta[satir - 1][sutun - 1] != '*' || tahta[satir - 1][sutun] != '*' || tahta[satir][sutun - 1] != '*') {
                 printf("These coordinates are occupied, select another coordinate.\n");
                 continue;
             }
@@ -192,7 +192,7 @@ void ucsimgeL() {
                 printf("Invalid coordinate.\n");
                 continue;
             }
-            if (tahta[satir - 1][sutun - 1] != '' || tahta[satir - 1][sutun] != '' || tahta[satir][sutun] != '*') {
+            if (tahta[satir - 1][sutun - 1] != '*' || tahta[satir - 1][sutun] != '*' || tahta[satir][sutun] != '*') {
                 printf("These coordinates are occupied, select another coordinate.\n");
                 continue;
             }
@@ -207,7 +207,7 @@ void ucsimgeL() {
                 printf("Invalid coordinate.\n");
                 continue;
             }
-            if (tahta[satir - 1][sutun - 1] != '' || tahta[satir][sutun - 1] != '' || tahta[satir][sutun] != '*') {
+            if (tahta[satir - 1][sutun - 1] != '*' || tahta[satir][sutun - 1] != '*' || tahta[satir][sutun] != '*') {
                 printf("These coordinates are occupied, select another coordinate.\n");
                 continue;
             }
@@ -222,7 +222,7 @@ void ucsimgeL() {
                 printf("Invalid coordinate.\n");
                 continue;
             }
-            if (tahta[satir - 1][sutun - 1] != '' || tahta[satir - 1][sutun] != '' || tahta[satir - 2][sutun] != '*') {
+            if (tahta[satir - 1][sutun - 1] != '*' || tahta[satir - 1][sutun] != '*' || tahta[satir - 2][sutun] != '*') {
                 printf("These coordinates are occupied, select another coordinate.\n");
                 continue;
             }
@@ -257,8 +257,8 @@ void dortsimge() {
             continue;
         }
 
-        if (tahta[satir - 1][sutun - 1] != '' || tahta[satir][sutun - 1] != '' ||
-            tahta[satir - 1][sutun] != '' || tahta[satir][sutun] != '') {
+        if (tahta[satir - 1][sutun - 1] != '*' || tahta[satir][sutun - 1] != '*' ||
+            tahta[satir - 1][sutun] != '*' || tahta[satir][sutun] != '*') {
             printf("These coordinates are occupied, select another coordinate.\n");
             continue;
         }
