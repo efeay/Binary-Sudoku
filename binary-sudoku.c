@@ -1,24 +1,37 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <unistd.h>
 char tahta[9][9];
-void message(){
+void message() {
     char randomLetter;
     int randomNumber;
     srand(time(NULL));
     randomLetter = 'A' + (rand() % 10);
     randomNumber = (rand() % 9) + 1;
-    printf("Enter Column and Row values in order, for example '%c %d'.\nType "
-           "'0 0' to end the game.\n\n",randomLetter,randomNumber);
-    printf("New Piece:\n");
+    const char *message1 = "\n\n\033[0mEnter Column and Row values in order, for example '";
+    const char *message2 = "'.\nType '0 0' to end the game.\n\n\033[31mNew Piece:\n\033[34m";
+    for (const char *ptr = message1; *ptr != '\0'; ptr++) {
+        putchar(*ptr);
+        fflush(stdout);
+        usleep(1000);
+    }
+    printf("%c %d", randomLetter, randomNumber);
+    fflush(stdout);
+    for (const char *ptr = message2; *ptr != '\0'; ptr++) {
+        putchar(*ptr);
+        fflush(stdout);
+        usleep(1000);
+    }
 }
+
 void finishthecode(int satir, int sutun) {
     if (satir == 0 && sutun == 25) {
         printf("You have successfully exited.\n");
         exit(0);
     }
 }
-int kontrol(char sutunchar) {
+int donustur(char sutunchar) {
     switch (sutunchar) {
     case 'A': return 1;
     case 'B': return 2;
@@ -40,20 +53,20 @@ void birsimge() {
   char sutunchar;
   while (1) {
     message();
-    printf("%d\n--------\n", deger);
+    printf("\n\033[37m========                                                             *\033[93mThe center piece is always the top-leftmost point,\n                                                                      with the leftmost position taking priority in case                                                                                                          of ambiguity.\n\033[32m", deger);
     if (scanf(" %c %d", &sutunchar, &satir) != 2) {
-    printf("Invalid input.\nPlease enter both column and row in the format 'letter number'.\n");
+    printf("\n\033[41m\033[37mInvalid coordinate.\nPlease enter both column and row in the format 'letter number'.\033[40m\n\n");
         while(getchar() != '\n');
         continue;
     }
-    sutun = kontrol(sutunchar);
+    sutun = donustur(sutunchar);
     finishthecode(satir, sutun);
     if (satir < 1 || satir > 9 || sutun < 1 || sutun >= 9) {
-      printf("Invalid coordinate.\n");
+      printf("\033[41m\033[37mInvalid coordinate.\033[40m\n");
       continue;
     }
     if (tahta[satir - 1][sutun - 1] != '*') {
-      printf("These coordinates are occupied, select another coordinate.\n");
+      printf("\033[41m\033[37mThese coordinates are occupied, select another coordinate.\033[40m\n\n");
       continue;
     }
     tahta[satir - 1][sutun - 1] = deger + '0';
@@ -67,20 +80,20 @@ void ikisimgeyatay() {
   char sutunchar;
   while (1) {
     message();
-    printf("%d %d\n--------\n", deger1, deger2);
+    printf("%d %d\n\033[37m========                                                             *\033[93mThe center piece is always the top-leftmost point,\n                                                                      with the leftmost position taking priority in case                                                                                                          of ambiguity.\n\033[32m", deger1, deger2);
     if (scanf(" %c %d", &sutunchar, &satir) != 2) {
-    printf("Invalid input.\nPlease enter both column and row in the format 'letter number'.\n");
+    printf("\n\033[41m\033[37mInvalid coordinate.\nPlease enter both column and row in the format 'letter number'.\033[40m\n\n");
         while(getchar() != '\n');
         continue;
     }
-    sutun = kontrol(sutunchar);
+    sutun = donustur(sutunchar);
     finishthecode(satir, sutun);
     if (satir < 1 || satir > 9 || sutun < 1 || sutun >= 9) {
-      printf("Invalid coordinate.\n");
+      printf("\033[41m\033[37mInvalid coordinate.\033[40m\n");
       continue;
     }
     if (tahta[satir - 1][sutun - 1] != '*' || tahta[satir - 1][sutun] != '*') {
-      printf("These coordinates are occupied, select another coordinate.\n");
+      printf("\033[41m\033[37mThese coordinates are occupied, select another coordinate.\033[40m\n\n");
       continue;
     }
     tahta[satir - 1][sutun - 1] = deger1 + '0';
@@ -95,20 +108,20 @@ void ikisimgedikey() {
   char sutunchar;
   while (1) {
     message();
-    printf("%d\n%d\n--------\n", deger1, deger2);
+    printf("%d\n%d\n\033[37m========                                                             *\033[93mThe center piece is always the top-leftmost point,\n                                                                      with the leftmost position taking priority in case                                                                                                          of ambiguity.\n\033[32m", deger1, deger2);
     if (scanf(" %c %d", &sutunchar, &satir) != 2) {
-    printf("Invalid input.\nPlease enter both column and row in the format 'letter number'.\n");
+    printf("\n\033[41m\033[37mInvalid coordinate.\nPlease enter both column and row in the format 'letter number'.\033[40m\n\n");
         while(getchar() != '\n');
         continue;
     }
-    sutun = kontrol(sutunchar);
+    sutun = donustur(sutunchar);
     finishthecode(satir, sutun);
     if (satir < 1 || satir >= 9 || sutun < 1 || sutun > 9) {
-      printf("Invalid coordinate.\n");
+      printf("\033[41m\033[37mInvalid coordinate.\033[40m\n");
       continue;
     }
     if (tahta[satir - 1][sutun - 1] != '*' || tahta[satir][sutun - 1] != '*') {
-      printf("These coordinates are occupied, select another coordinate.\n");
+      printf("\033[41m\033[37mThese coordinates are occupied, select another coordinate.\033[40m\n\n");
       continue;
     }
     tahta[satir - 1][sutun - 1] = deger1 + '0';
@@ -124,22 +137,22 @@ void ucsimgedikey() {
   char sutunchar;
   while (1) {
     message();
-    printf("%d\n%d\n%d\n--------\n", deger1, deger2, deger3);
+    printf("%d\n%d\n%d\n\033[37m========                                                             *\033[93mThe center piece is always the top-leftmost point,\n                                                                      with the leftmost position taking priority in case                                                                                                          of ambiguity.\n\033[32m", deger1, deger2, deger3);
     if (scanf(" %c %d", &sutunchar, &satir) != 2) {
-    printf("Invalid input.\nPlease enter both column and row in the format 'letter number'.\n");
+    printf("\n\033[41m\033[37mInvalid coordinate.\nPlease enter both column and row in the format 'letter number'.\033[40m\n\n");
         while(getchar() != '\n');
         continue;
     }
-    sutun = kontrol(sutunchar);
+    sutun = donustur(sutunchar);
     finishthecode(satir, sutun);
     if (satir < 1 || satir >= 8 || sutun < 1 || sutun > 9) {
-      printf("Invalid coordinate.\n");
+      printf("\033[41m\033[37mInvalid coordinate.\033[40m\n");
       continue;
     }
 
     if (tahta[satir - 1][sutun - 1] != '*' || tahta[satir][sutun - 1] != '*' ||
         tahta[satir + 1][sutun - 1] != '*') {
-      printf("These coordinates are occupied, select another coordinate.\n");
+      printf("\033[41m\033[37mThese coordinates are occupied, select another coordinate.\033[40m\n\n");
       continue;
     }
     tahta[satir - 1][sutun - 1] = deger1 + '0';
@@ -156,21 +169,21 @@ void ucsimgeyatay() {
   char sutunchar;
   while (1) {
     message();
-    printf("%d %d %d\n--------\n", deger1, deger2, deger3);
+    printf("%d %d %d\n\033[37m========                                                             *\033[93mThe center piece is always the top-leftmost point,\n                                                                      with the leftmost position taking priority in case                                                                                                          of ambiguity.\n\033[32m", deger1, deger2, deger3);
     if (scanf(" %c %d", &sutunchar, &satir) != 2) {
-    printf("Invalid input.\nPlease enter both column and row in the format 'letter number'.\n");
+    printf("\n\033[41m\033[37mInvalid coordinate.\nPlease enter both column and row in the format 'letter number'.\033[40m\n\n");
         while(getchar() != '\n');
         continue;
     }
-    sutun = kontrol(sutunchar);
+    sutun = donustur(sutunchar);
     finishthecode(satir, sutun);
     if (satir < 1 || satir > 9 || sutun < 1 || sutun >= 8) {
-      printf("Invalid coordinate.\n");
+      printf("\033[41m\033[37mInvalid coordinate.\033[40m\n");
       continue;
     }
     if (tahta[satir - 1][sutun - 1] != '*' || tahta[satir - 1][sutun] != '*' ||
         tahta[satir - 1][sutun + 1] != '*') {
-      printf("These coordinates are occupied, select another coordinate.\n");
+      printf("\033[41m\033[37mThese coordinates are occupied, select another coordinate.\033[40m\n\n");
       continue;
     }
     tahta[satir - 1][sutun - 1] = deger1 + '0';
@@ -189,21 +202,21 @@ void ucsimgeL() {
   while (1) {
     if (varyant == 0) {
       message();
-      printf("%d %d \n%d\n--------\n", deger1, deger2, deger3);
+      printf("%d %d \n%d\n\033[37m========                                                             *\033[93mThe center piece is always the top-leftmost point,\n                                                                      with the leftmost position taking priority in case                                                                                                          of ambiguity.\n\033[32m", deger1, deger2, deger3);
       if (scanf(" %c %d", &sutunchar, &satir) != 2) {
-         printf("Invalid input.\nPlease enter both column and row in the format 'letter number'.\n");
+         printf("\n\033[41m\033[37mInvalid coordinate.\nPlease enter both column and row in the format 'letter number'.\033[40m\n\n");
         while(getchar() != '\n');
         continue;
       }
-      sutun = kontrol(sutunchar);
+      sutun = donustur(sutunchar);
       finishthecode(satir, sutun);
       if (satir < 1 || satir > 8 || sutun < 1 || sutun >= 9) {
-        printf("Invalid coordinate.\n");
+        printf("\033[41m\033[37mInvalid coordinate.\033[40m\n");
         continue;
       }
       if (tahta[satir - 1][sutun - 1] != '*' ||
           tahta[satir - 1][sutun] != '*' || tahta[satir][sutun - 1] != '*') {
-        printf("These coordinates are occupied, select another coordinate.\n");
+        printf("\033[41m\033[37mThese coordinates are occupied, select another coordinate.\033[40m\n\n");
         continue;
       }
       tahta[satir - 1][sutun - 1] = deger1 + '0';
@@ -211,21 +224,21 @@ void ucsimgeL() {
       tahta[satir][sutun - 1] = deger3 + '0';
     } else if (varyant == 1) {
       message();
-      printf("%d %d\n  %d\n--------\n", deger1, deger2, deger3);
+      printf("%d %d\n  %d\n\033[37m========                                                             *\033[93mThe center piece is always the top-leftmost point,\n                                                                      with the leftmost position taking priority in case                                                                                                          of ambiguity.\n\033[32m", deger1, deger2, deger3);
       if (scanf(" %c %d", &sutunchar, &satir) != 2) {
-        printf("Invalid input.\nPlease enter both column and row in the format 'letter number'.\n");
+        printf("\n\033[41m\033[37mInvalid coordinate.\nPlease enter both column and row in the format 'letter number'.\033[40m\n\n");
         while(getchar() != '\n');
         continue;
       }
-      sutun = kontrol(sutunchar);
+      sutun = donustur(sutunchar);
       finishthecode(satir, sutun);
       if (satir < 1 || satir > 8 || sutun < 1 || sutun > 8) {
-        printf("Invalid coordinate.\n");
+        printf("\033[41m\033[37mInvalid coordinate.\033[40m\n");
         continue;
       }
       if (tahta[satir - 1][sutun - 1] != '*' ||
           tahta[satir - 1][sutun] != '*' || tahta[satir][sutun] != '*') {
-        printf("These coordinates are occupied, select another coordinate.\n");
+        printf("\033[41m\033[37mThese coordinates are occupied, select another coordinate.\033[40m\n\n");
         continue;
       }
       tahta[satir - 1][sutun - 1] = deger1 + '0';
@@ -233,21 +246,21 @@ void ucsimgeL() {
       tahta[satir][sutun] = deger3 + '0';
     } else if (varyant == 2) {
       message();
-      printf("%d\n%d %d\n--------\n", deger1, deger2, deger3);
+      printf("%d\n%d %d\n\033[37m========                                                             *\033[93mThe center piece is always the top-leftmost point,\n                                                                      with the leftmost position taking priority in case                                                                                                          of ambiguity.\n\033[32m", deger1, deger2, deger3);
       if (scanf(" %c %d", &sutunchar, &satir) != 2) {
-    printf("Invalid input.\nPlease enter both column and row in the format 'letter number'.\n");
+    printf("\n\033[41m\033[37mInvalid coordinate.\nPlease enter both column and row in the format 'letter number'.\033[40m\n\n");
         while(getchar() != '\n');
         continue;
       }
-      sutun = kontrol(sutunchar);
+      sutun = donustur(sutunchar);
       finishthecode(satir, sutun);
       if (satir < 1 || satir >= 9 || sutun < 1 || sutun > 8) {
-        printf("Invalid coordinate.\n");
+        printf("\033[41m\033[37mInvalid coordinate.\033[40m\n");
         continue;
       }
       if (tahta[satir - 1][sutun - 1] != '*' ||
           tahta[satir][sutun - 1] != '*' || tahta[satir][sutun] != '*') {
-        printf("These coordinates are occupied, select another coordinate.\n");
+        printf("\033[41m\033[37mThese coordinates are occupied, select another coordinate.\033[40m\n\n");
         continue;
       }
       tahta[satir - 1][sutun - 1] = deger1 + '0';
@@ -255,21 +268,21 @@ void ucsimgeL() {
       tahta[satir][sutun] = deger3 + '0';
     } else if (varyant == 3) {
       message();
-      printf("  %d\n%d %d\n--------\n", deger3, deger1, deger2);
+      printf("  %d\n%d %d\n\033[37m========                                                             *\033[93mThe center piece is always the top-leftmost point,\n                                                                      with the leftmost position taking priority in case                                                                                                          of ambiguity.\n\033[32m", deger3, deger1, deger2);
       if (scanf(" %c %d", &sutunchar, &satir) != 2) {
-         printf("Invalid input.\nPlease enter both column and row in the format 'letter number'.\n");
+         printf("\n\033[41m\033[37mInvalid coordinate.\nPlease enter both column and row in the format 'letter number'.\033[40m\n\n");
         while(getchar() != '\n');
         continue;
       }
-      sutun = kontrol(sutunchar);
+      sutun = donustur(sutunchar);
       finishthecode(satir, sutun);
-      if (satir < 3 || satir > 9 || sutun < 1 || sutun > 8) {
-        printf("Invalid coordinate.\n");
+      if (satir < 2 || satir > 9 || sutun < 1 || sutun > 8) {
+        printf("\033[41m\033[37mInvalid coordinate.\033[40m\n");
         continue;
       }
       if (tahta[satir - 1][sutun - 1] != '*' ||
           tahta[satir - 1][sutun] != '*' || tahta[satir - 2][sutun] != '*') {
-        printf("These coordinates are occupied, select another coordinate.\n");
+        printf("\033[41m\033[37mThese coordinates are occupied, select another coordinate.\033[40m\n\n");
         continue;
       }
       tahta[satir - 1][sutun - 1] = deger1 + '0';
@@ -288,21 +301,21 @@ void dortsimge() {
   char sutunchar;
   while (1) {
     message();
-    printf("%d %d\n%d %d\n--------\n", deger1, deger2, deger3, deger4);
+    printf("%d %d\n%d %d\n\033[37m========                                                             *\033[93mThe center piece is always the top-leftmost point,\n                                                                      with the leftmost position taking priority in case                                                                                                          of ambiguity.\n\033[32m", deger1, deger2, deger3, deger4);
     if (scanf(" %c %d", &sutunchar, &satir) != 2) {
-        printf("Invalid input.\nPlease enter both column and row in the format 'letter number'.\n");
+        printf("\n\033[41m\033[37mInvalid coordinate.\nPlease enter both column and row in the format 'letter number'.\033[40m\n\n");
         while(getchar() != '\n');
         continue;
     }
-    sutun = kontrol(sutunchar);
+    sutun = donustur(sutunchar);
     finishthecode(satir, sutun);
     if (satir < 1 || satir >= 9 || sutun < 1 || sutun >= 9) {
-      printf("Invalid coordinate.\n");
+      printf("\033[41m\033[37mInvalid coordinate.\033[40m\n");
       continue;
     }
     if (tahta[satir - 1][sutun - 1] != '*' || tahta[satir][sutun - 1] != '*' ||
         tahta[satir - 1][sutun] != '*' || tahta[satir][sutun] != '*') {
-      printf("These coordinates are occupied, select another coordinate.\n");
+      printf("\033[41m\033[37mThese coordinates are occupied, select another coordinate.\033[40m\n\n");
       continue;
     }
     tahta[satir - 1][sutun - 1] = deger1 + '0';
@@ -338,12 +351,20 @@ int main() {
       tahta[i][j] = '*';
     }
   }
+
   int piece = 0;
   while (1) {
-    printf("                  A B C   D E F   G H J\n");
-    printf("                +-------+-------+-------+   Number of Placed Pieces = %d\n",piece);
+    system("cls");
+    printf("                    \033[0m========================\n");
+    printf("                    ||                    ||\n");
+    printf("                    ||    \033[31m\033[3mBINARY SUDOKU\033[0m   ||\n");
+    printf("                    ||                    ||\n");
+    printf("                    ========================\n\n");
+    printf("\033[31m");
+    printf("                      \033[33mA B C   D E F   G H J\n");
+    printf("                    \033[31mp-------o-------o-------q     \033[3mNumber of Placed Pieces = \033[36m%d \n\033[0m",piece);
     for (i = 0; i < 9; i++) {
-      printf("              %d |", i + 1);
+      printf("                  \033[34m%d\033[31m |", i + 1);
       for (j = 0; j < 9; j++) {
         printf(" %c", tahta[i][j]);
         if ((j + 1) % 3 == 0 && j != 8) {
@@ -352,10 +373,11 @@ int main() {
       }
       printf(" | \n");
       if ((i + 1) % 3 == 0 && i != 8) {
-        printf("                +-------+-------+-------+\n"); 
+        printf("                    o-------o-------o-------o\n");
       }
     }
-    printf("                +-------+-------+-------+\n");
+    printf("                    b-------o-------o-------d\n\n");
+    printf("\033[0m");
     piece = piece + 1;
     varyasyonsec();
   }
