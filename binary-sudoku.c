@@ -53,9 +53,9 @@ void birsimge() {
   char sutunchar;
   while (1) {
     message();
-    printf("\n\033[37m========                                                             *\033[93mThe center piece is always the top-leftmost point,\n                                                                      with the leftmost position taking priority in case                                                                                                          of ambiguity.\n\033[32m", deger);
+    printf("%d\n\033[37m========                                                             *\033[93mThe center piece is always the top-leftmost point,\n                                                                      with the leftmost position taking priority in case                                                                                                          of ambiguity.\n\033[32m", deger);
     if (scanf(" %c %d", &sutunchar, &satir) != 2) {
-    printf("%d\n\033[41m\033[37mInvalid coordinate.\nPlease enter both column and row in the format 'letter number'.\033[40m\n\n");
+    printf("\n\033[41m\033[37mInvalid coordinate.\nPlease enter both column and row in the format 'letter number'.\033[40m\n\n");
         while(getchar() != '\n');
         continue;
     }
