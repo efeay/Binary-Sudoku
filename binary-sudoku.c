@@ -82,7 +82,7 @@ void ikisimgeyatay() {
     message();
     printf("%d %d\n\033[37m========                                                             *\033[93mThe center piece is always the top-leftmost point,\n                                                                      with the leftmost position taking priority in case                                                                                                          of ambiguity.\n\033[32m", deger1, deger2);
     if (scanf(" %c %d", &sutunchar, &satir) != 2) {
-    printf("\n\033[41m\033[37mInvalid coordinate.\nPlease enter both column and row in the format 'letter number'.\033[40m\n\n");
+    printf("%d\n\033[41m\033[37mInvalid coordinate.\nPlease enter both column and row in the format 'letter number'.\033[40m\n\n");
         while(getchar() != '\n');
         continue;
     }
